@@ -1,0 +1,36 @@
+<!-- Alias AI Waitlist Form -->
+<div style="font-family: Inter, sans-serif; background:#0e0e0e; color:#fff; padding: 2em; text-align:center; border-radius:12px; max-width: 600px; margin: 2em auto;">
+  <h2 style="font-size: 2em; margin-bottom: 0.3em;">Join the Alias AI Waitlist</h2>
+  <p style="color:#ccc; font-size:1em; margin-bottom:1.5em;">
+    Be the first to create ultra-realistic AI avatars from simple text. No actors. No cameras. Just you and AI.
+  </p>
+  <form id="alias-waitlist-form" onsubmit="submitAliasForm(event)" style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px;">
+    <input type="email" id="alias-email" placeholder="Enter your email" required style="padding:12px 16px; border:none; border-radius:8px; font-size:1em; width:250px;">
+    <button type="submit" style="padding:12px 16px; background:#00ffe7; color:#000; font-weight:bold; border:none; border-radius:8px; font-size:1em; cursor:pointer;">
+      Join Now
+    </button>
+  </form>
+  <p id="alias-response" style="margin-top:1em; color:#00ffe7; display:none;">✅ You're on the list. Stay tuned!</p>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  function submitAliasForm(e) {
+    e.preventDefault();
+    const email = document.getElementById('alias-email').value;
+    const msg = document.getElementById('alias-response');
+    axios.post('https://api.web3forms.com/submit', {
+      access_key: '0a967028-829b-4143-9c37-2b5c4ed00415',
+      from_name: 'Alias AI Substack',
+      subject: 'New Alias AI Signup via Substack',
+      message: `New signup: ${email}`,
+      email: email
+    }).then(() => {
+      msg.style.display = 'block';
+    }).catch(() => {
+      msg.innerText = '❌ Something went wrong. Try again later.';
+      msg.style.color = 'red';
+      msg.style.display = 'block';
+    });
+  }
+</script>
